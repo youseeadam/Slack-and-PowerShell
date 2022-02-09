@@ -2,7 +2,9 @@
 
 I go through what I have learned about the Slack API and PowerShell
 
-There is no Code here, just what I have learned
+There is no Code repository here, just what I have learned
+
+Start with this: https://api.slack.com/web
 
 I had a task to do three things via a bot
 
@@ -38,6 +40,8 @@ oauth_config:
 - im:history
 - mpim:history
 - groups:history
+
+You can easily find out what is requried for each method/rest command by looking at the requried scopes.  I have a few more listed here than are required by this document, but that is because there is more going on than just this in the channel.
 
 There are two different REST commands being used
 - Chat.PostMessage (https://api.slack.com/methods/chat.postMessage)
@@ -108,7 +112,7 @@ This is where it gets fun.  This message will return the following two values
 - has_more
 - messages.text
 
-Next cursor and has_more work together in building a long message (like JSON). The has_more tells you if there is more in that statment. Remember a slack response, specifically JSON is broken down into 7K (or 8K?) sizes. So a long return will have several parts to it.  The has_more tells you if there is more to that slack message. The cursor tells the unique ID of the next message.
+Next cursor and has_more work together in building a long message (like JSON). The has_more tells you if there is more in that statment. Remember a slack response, specifically JSON is broken down into 7K (or 8K?) sizes. So a long return will have several parts to it.  The has_more tells you if there is more to that slack message. The cursor tells the unique ID of the next message. This is known as pagination (https://api.slack.com/docs/pagination)
 
 So what you end up with is a loop that looks like the following
 
